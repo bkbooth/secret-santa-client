@@ -1,1 +1,1 @@
-# 🤫🎅 Secret Santa Elixir API
+# 🤫🎅 Secret Santa React Client
