@@ -3,7 +3,7 @@ import App, { Container } from 'next/app'
 
 import { emojifyDomain } from '../lib/emojifyDomain'
 try {
-  emojifyDomain(window.location)
+  emojifyDomain(window)
 } catch (err) {}
 
 export default class MyApp extends App {
