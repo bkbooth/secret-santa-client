@@ -67,7 +67,10 @@
         if (navigator.userAgent.indexOf('CriOS') > -1) useEmojiDomain = false
 
         if (
-          (useEmojiDomain && ~EMOJI_DOMAINS.indexOf(wl.hostname)) ||
+          (useEmojiDomain && (
+            ~EMOJI_DOMAINS.indexOf(wl.hostname) ||
+            ~PUNYCODE_DOMAINS.indexOf(wl.hostname)
+          )) ||
           (!useEmojiDomain && ~STANDARD_DOMAINS.indexOf(wl.hostname))
         ) {
           console.log('Happy with current domain name...')
