@@ -46,5 +46,38 @@
     <div class="container">
       <h1>🤫🎅</h1>
     </div>
+
+    <script>
+      var EMOJI_DOMAINS = ['🤫🎅.ws', '🤫🎁.ws']
+      var STANDARD_DOMAINS = ['shhh.gift']
+
+      ;(function (wl) {
+        if (!(~EMOJI_DOMAINS.indexOf(wl.hostname) || ~STANDARD_DOMAINS.indexOf(wl.hostname))) {
+          console.log('Is other domain, moving on...')
+          return
+        }
+
+        console.log('Testing for emoji or standard domain...')
+        var useEmojiDomain = /^((?!chrome).)*safari/i.test(navigator.userAgent)
+        if (navigator.userAgent.indexOf('CriOS') > -1) useEmojiDomain = false
+
+        if (
+          (useEmojiDomain && ~EMOJI_DOMAINS.indexOf(wl.hostname)) ||
+          (!useEmojiDomain && ~STANDARD_DOMAINS.indexOf(wl.hostname))
+        ) {
+          console.log('Happy with current domain name...')
+          return
+        }
+
+        console.log('Redirecting to ' + (useEmojiDomain ? 'emoji' : 'standard') + ' domain')
+        var newUrl = wl.protocol + '//'
+          + (useEmojiDomain ? EMOJI_DOMAINS[0] : STANDARD_DOMAINS[0])
+          + (wl.port ? (':' + wl.port) : '')
+          + wl.pathname
+          + wl.search
+        console.log('New url: ' + newUrl)
+        window.location = newUrl
+      })(window.location)
+    </script>
   </body>
 </html>
