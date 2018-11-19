@@ -48,21 +48,17 @@
     </div>
 
     <script>
-      var EMOJI_DOMAINS = ['🤫🎅.ws', '🤫🎁.ws']
-      var PUNYCODE_DOMAINS = ['xn--8j8hl4g.ws', 'xn--4j8ht4g.ws']
-      var STANDARD_DOMAINS = ['shhh.gift']
+      (function (wl) {
+        var EMOJI_DOMAINS = ['🤫🎅.ws', '🤫🎁.ws']
+        var PUNYCODE_DOMAINS = ['xn--8j8hl4g.ws', 'xn--4j8ht4g.ws']
+        var STANDARD_DOMAINS = ['shhh.gift']
 
-      ;(function (wl) {
         if (!(
           ~EMOJI_DOMAINS.indexOf(wl.hostname) ||
           ~PUNYCODE_DOMAINS.indexOf(wl.hostname) ||
           ~STANDARD_DOMAINS.indexOf(wl.hostname)
-        )) {
-          console.log('Is other domain, moving on...')
-          return
-        }
+        )) return // if using an unknown domain, assume dev (eg. localhost or IP address)
 
-        console.log('Testing for emoji or standard domain...')
         var useEmojiDomain = /^((?!chrome).)*safari/i.test(navigator.userAgent)
         if (navigator.userAgent.indexOf('CriOS') > -1) useEmojiDomain = false
 
@@ -72,18 +68,14 @@
             ~PUNYCODE_DOMAINS.indexOf(wl.hostname)
           )) ||
           (!useEmojiDomain && ~STANDARD_DOMAINS.indexOf(wl.hostname))
-        ) {
-          console.log('Happy with current domain name...')
-          return
-        }
+        ) return // current domain is ok
 
-        console.log('Redirecting to ' + (useEmojiDomain ? 'emoji' : 'standard') + ' domain')
         var newUrl = wl.protocol + '//'
           + (useEmojiDomain ? EMOJI_DOMAINS[0] : STANDARD_DOMAINS[0])
           + (wl.port ? (':' + wl.port) : '')
           + wl.pathname
           + wl.search
-        console.log('New url: ' + newUrl)
+        console.log('Redirecting to: ' + newUrl)
         window.location = newUrl
       })(window.location)
     </script>
