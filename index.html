@@ -49,10 +49,15 @@
 
     <script>
       var EMOJI_DOMAINS = ['🤫🎅.ws', '🤫🎁.ws']
+      var PUNYCODE_DOMAINS = ['xn--8j8hl4g.ws', 'xn--4j8ht4g.ws']
       var STANDARD_DOMAINS = ['shhh.gift']
 
       ;(function (wl) {
-        if (!(~EMOJI_DOMAINS.indexOf(wl.hostname) || ~STANDARD_DOMAINS.indexOf(wl.hostname))) {
+        if (!(
+          ~EMOJI_DOMAINS.indexOf(wl.hostname) ||
+          ~PUNYCODE_DOMAINS.indexOf(wl.hostname) ||
+          ~STANDARD_DOMAINS.indexOf(wl.hostname)
+        )) {
           console.log('Is other domain, moving on...')
           return
         }
