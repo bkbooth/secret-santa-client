@@ -1,10 +1,10 @@
 import React from 'react'
 import App, { Container } from 'next/app'
 
-import { emojifyDomain } from '../lib/emojifyDomain'
-try {
-  emojifyDomain(window)
-} catch (err) {}
+if (process.browser) {
+  import('../lib/emojifyDomain')
+    .then(({ emojifyDomain }) => emojifyDomain())
+}
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {
