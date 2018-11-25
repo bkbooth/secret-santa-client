@@ -2,7 +2,11 @@ module.exports = {
   publicRuntimeConfig: {
     emojiDomains: ["🤫🎅.ws", "🤫🎁.ws"],
     punycodeDomains: ["xn--8j8hl4g.ws", "xn--4j8ht4g.ws"],
-    standardDomains: ["shhh.gift"]
+    standardDomains: ["shhh.gift"],
+
+    theme: {
+      lightRed: "#fff1f1"
+    }
   },
 
   webpack: config => {
