@@ -15,7 +15,7 @@ export const ALL_USERS_QUERY = gql`
 
 const Home = () => (
   <Query query={ALL_USERS_QUERY}>
-    {({ data, loading, error }) => {
+    {({ data, error, loading }) => {
       if (error)
         return (
           <p>
