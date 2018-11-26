@@ -7,13 +7,11 @@ const {
   publicRuntimeConfig: { theme }
 } = getConfig();
 
-const Page = props => (
-  <>
-    <div className="page">
-      <Meta />
-      <Header />
-      <div className="content">{props.children}</div>
-    </div>
+const Page = ({ children }) => (
+  <main className="page">
+    <Meta />
+    <Header />
+    <div className="content">{children}</div>
 
     <style jsx>{`
       .page {
@@ -47,7 +45,7 @@ const Page = props => (
         background: ${theme.lightRed};
       }
     `}</style>
-  </>
+  </main>
 );
 
 export default Page;

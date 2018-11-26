@@ -1,8 +1,8 @@
 import React from "react";
 
 const Header = () => (
-  <>
-    <header>🤫🎅</header>
+  <header>
+    <div>🤫🎅</div>
 
     <style jsx>{`
       header {
@@ -12,7 +12,7 @@ const Header = () => (
         padding: 20px;
       }
     `}</style>
-  </>
+  </header>
 );
 
 export default Header;

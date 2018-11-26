@@ -1,9 +1,11 @@
 import React from "react";
 import App, { Container } from "next/app";
+import { ApolloProvider } from "react-apollo";
+import withApolloClient from "../lib/with-apollo-client";
 import Page from "../components/Page";
 
 if (process.browser) {
-  import("../lib/emojifyDomain").then(({ emojifyDomain }) => emojifyDomain());
+  import("../lib/emojify-domain").then(({ emojifyDomain }) => emojifyDomain());
 }
 
 class MyApp extends App {
@@ -18,16 +20,18 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { apolloClient, Component, pageProps } = this.props;
 
     return (
       <Container>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
+        <ApolloProvider client={apolloClient}>
+          <Page>
+            <Component {...pageProps} />
+          </Page>
+        </ApolloProvider>
       </Container>
     );
   }
 }
 
-export default MyApp;
+export default withApolloClient(MyApp);
