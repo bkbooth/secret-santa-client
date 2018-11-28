@@ -1,0 +1,114 @@
+import React, { Component } from "react";
+import { Mutation } from "react-apollo";
+import gql from "graphql-tag";
+
+export const SIGNUP_MUTATION = gql`
+  mutation SIGNUP_MUTATION(
+    $name: String!
+    $email: String!
+    $password: String!
+    $phoneNumber: String
+  ) {
+    signup(
+      name: $name
+      email: $email
+      password: $password
+      phoneNumber: $phoneNumber
+    ) {
+      id
+      name
+      email
+    }
+  }
+`;
+
+class Signup extends Component {
+  state = {
+    name: "",
+    email: "",
+    password: "",
+    phoneNumber: ""
+  };
+
+  saveToState = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  render() {
+    return (
+      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
+        {(signup, { error, loading }) => (
+          <form
+            method="POST"
+            onSubmit={async event => {
+              event.preventDefault();
+              await signup();
+              this.setState({
+                name: "",
+                email: "",
+                password: "",
+                phoneNumber: ""
+              });
+            }}
+          >
+            <fieldset disabled={loading} aria-busy={loading}>
+              <h2>Signup for an account</h2>
+
+              <label htmlFor="name">
+                Name
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  value={this.state.name}
+                  onChange={this.saveToState}
+                />
+              </label>
+
+              <label htmlFor="email">
+                Email
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email"
+                  value={this.state.email}
+                  onChange={this.saveToState}
+                />
+              </label>
+
+              <label htmlFor="phoneNumber">
+                Phone Number
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                  value={this.state.phoneNumber}
+                  onChange={this.saveToState}
+                />
+              </label>
+
+              <label htmlFor="password">
+                Password
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Password"
+                  value={this.state.password}
+                  onChange={this.saveToState}
+                />
+              </label>
+
+              <button type="submit">Signup</button>
+            </fieldset>
+          </form>
+        )}
+      </Mutation>
+    );
+  }
+}
+
+export default Signup;

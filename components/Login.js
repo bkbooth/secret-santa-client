@@ -35,7 +35,7 @@ class Login extends Component {
             }}
           >
             <fieldset disabled={loading} aria-busy={loading}>
-              <h1>Login</h1>
+              <h2>Login to your account</h2>
 
               <label htmlFor="email">
                 Email
