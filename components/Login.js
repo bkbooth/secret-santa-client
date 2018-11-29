@@ -41,7 +41,6 @@ class Login extends Component {
                 Email
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   placeholder="Email"
                   value={this.state.email}
@@ -53,7 +52,6 @@ class Login extends Component {
                 Password
                 <input
                   type="password"
-                  id="password"
                   name="password"
                   placeholder="Password"
                   value={this.state.password}

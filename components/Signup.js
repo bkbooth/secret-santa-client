@@ -58,7 +58,6 @@ class Signup extends Component {
                 Name
                 <input
                   type="text"
-                  id="name"
                   name="name"
                   placeholder="Name"
                   value={this.state.name}
@@ -70,7 +69,6 @@ class Signup extends Component {
                 Email
                 <input
                   type="email"
-                  id="email"
                   name="email"
                   placeholder="Email"
                   value={this.state.email}
@@ -82,7 +80,6 @@ class Signup extends Component {
                 Phone Number
                 <input
                   type="text"
-                  id="phoneNumber"
                   name="phoneNumber"
                   placeholder="Phone Number"
                   value={this.state.phoneNumber}
@@ -94,7 +91,6 @@ class Signup extends Component {
                 Password
                 <input
                   type="password"
-                  id="password"
                   name="password"
                   placeholder="Password"
                   value={this.state.password}
