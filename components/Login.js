@@ -3,11 +3,24 @@ import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 
 export const LOGIN_MUTATION = gql`
-  mutation LOGIN_MUTATION($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      id
-      name
-      email
+  mutation LOGIN_MUTATION($credentials: LoginParams!) {
+    login(credentials: $credentials) {
+      successful
+      messages {
+        code
+        field
+        message
+        template
+        options {
+          key
+          value
+        }
+      }
+      result {
+        id
+        name
+        email
+      }
     }
   }
 `;
@@ -24,7 +37,10 @@ class Login extends Component {
 
   render() {
     return (
-      <Mutation mutation={LOGIN_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={LOGIN_MUTATION}
+        variables={{ credentials: this.state }}
+      >
         {(login, { error, loading }) => (
           <form
             method="POST"
